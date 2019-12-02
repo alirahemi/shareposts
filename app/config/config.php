@@ -1,15 +1,18 @@
 <?php
     // DB Params
     define('DB_HOST', '127.0.0.1');
-    define('DB_USER', '_Your_User_');
-    define('DB_PASS', '_Your_pass_');
-    define('DB_NAME', '_Your_dbname_');
+    define('DB_USER', 'ali');
+    define('DB_PASS', 'ali123456');
+    define('DB_NAME', 'shareposts');
     
     // App Root
     define ('APPROOT', dirname(dirname (__FILE__)));
 
     // URL Root
-    define ('URLROOT', '_Your_url_'); // example: http://localhost:3000/traversymvc/traversymvc
+    define ('URLROOT', 'http://localhost:3000/shareposts');
 
     // Site Name
-    define('SITENAME', '_Your_sitename_');
+    define('SITENAME', 'SharePosts');
+
+    // APP Version
+    define('APPVERSION', '1.0.0');
