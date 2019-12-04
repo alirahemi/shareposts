@@ -93,6 +93,58 @@
             // Check for post
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Process form
+
+                // Sanitize POST data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                 // Init data
+                 $data = [
+                    'email' => trim($_POST['email']),
+                    'password' => trim($_POST['password']),
+                    'email_err' => '',
+                    'password_err' => ''
+                ];
+
+                // Validate Data
+                if(empty($data['email'])){
+                    $data['email_err'] = 'Please enter email';
+                }
+
+                if(empty($data['password'])){
+                    $data['password_err'] = 'Please enter password';
+                }
+
+                // Check user/email
+                if($this->userModel->findUserByEmail($data['email'])){
+                    // User Found
+                } else {
+                    if(empty($data['email'])){
+                        $data['email_err'] = 'Please enter email';
+                    } else {
+                        // User not found
+                    $data['email_err'] = 'No user found';
+                    }
+                }
+
+                // make sure errors are empty
+                if(empty($data['email_err']) && empty($data['password_err'])){
+                    //Validated
+                    // Check and set logged in user
+                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+                    if($loggedInUser){
+                        // Create Session
+                        die('LOGIN SUCCESS');
+                    } else {
+                        $data['password_err'] = 'Password incorrect';
+                        $this->view('users/login', $data);
+                    }
+
+                } else {
+                    // Load view with error
+                    $this->view('users/login', $data);
+                }
+
             } else {
                 // init data
                 $data = [
