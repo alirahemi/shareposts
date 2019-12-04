@@ -1,5 +1,5 @@
 <?php
-    require_once '../app/bootstrap.php';
+  require_once '../app/bootstrap.php';
 
-    // Init Core Library
-    $url = new Core;
+  // Init Core Library
+  $init = new Core;
